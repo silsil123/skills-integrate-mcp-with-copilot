@@ -31,6 +31,7 @@ A super simple FastAPI application that allows students to view and sign up for 
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| DELETE | `/activities/{activity_name}/unregister?email=student@mergington.edu` | Unregister from an activity                                             |
 
 ## Data Model
 
@@ -48,3 +49,16 @@ The application uses a simple data model with meaningful identifiers:
    - Grade level
 
 All data is stored in memory, which means data will be reset when the server restarts.
+
+## Static Web UI
+
+A simple web interface is available at [http://localhost:8000/static/index.html](http://localhost:8000/static/index.html).
+
+## Notes
+
+- All data is stored in memory and will be lost when the server restarts.
+- Python 3.7+ is required.
+- For all dependencies, you can also run:
+  ```
+  pip install -r requirements.txt
+  ```
