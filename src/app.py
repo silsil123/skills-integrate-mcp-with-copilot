@@ -7,7 +7,7 @@ for extracurricular activities at Mergington High School.
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, FileResponse
 import os
 from pathlib import Path
 
@@ -83,6 +83,11 @@ def root():
     return RedirectResponse(url="/static/index.html")
 
 
+@app.get("/favicon.ico")
+def favicon():
+    return FileResponse(os.path.join(current_dir, "static", "favicon.ico"))
+
+
 @app.get("/activities")
 def get_activities():
     return activities
@@ -130,3 +135,8 @@ def unregister_from_activity(activity_name: str, email: str):
     # Remove student
     activity["participants"].remove(email)
     return {"message": f"Unregistered {email} from {activity_name}"}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
